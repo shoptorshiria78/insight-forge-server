@@ -4,7 +4,7 @@ require("dotenv").config();
 const app = express();
 const jwt = require("jsonwebtoken");
 const port = process.env.PORT || 5000;
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 
 
 //middleware
@@ -25,10 +25,10 @@ const mongoAtlasUri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PAS
         .catch(err=>console.log(err))
 
  
-
+    
 
     app.get('/', async (req, res) => {
-        res.send("server is ready")
+        res.send("server is ready to work")
       })
       
       app.listen(port, () => {
