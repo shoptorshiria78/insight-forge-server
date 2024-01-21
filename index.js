@@ -15,7 +15,7 @@ app.use(cors());
 
 
 
-const mongoAtlasUri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.7bvfsss.mongodb.net/?retryWrites=true&w=majority`;
+const mongoAtlasUri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.ssnfvav.mongodb.net/?retryWrites=true&w=majority`;
 
 
     // Connect to the MongoDB cluster
