@@ -35,3 +35,4 @@ const mongoAtlasUri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PAS
         console.log(`server is running on port:${port}`)
         
       })
+      
