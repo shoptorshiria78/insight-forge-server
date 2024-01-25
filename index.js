@@ -9,11 +9,8 @@ const mongoose = require('mongoose');
 
 // router
 const discusRoutes = require('./src/routes/discus')
-<<<<<<< HEAD
 const blogRoutes = require('./src/routes/blog')
-=======
 const userRoutes = require('./src/routes/user')
->>>>>>> 3b5e59c85dc868b7b0f119496d7039c08c7ec7f2
 
 
 //middleware
@@ -31,7 +28,6 @@ mongoose.connect(
   .catch(err => console.log(err))
 
 
-<<<<<<< HEAD
     app.use(discusRoutes)
     app.use(blogRoutes)
 
@@ -40,7 +36,6 @@ mongoose.connect(
         console.log(`server is running on port:${port}`)
         
       })
-=======
 //discus Routes
 app.use(discusRoutes)
 
@@ -51,4 +46,5 @@ app.listen(port, () => {
   console.log(`server is running on port:${port}`)
 
 })
->>>>>>> 3b5e59c85dc868b7b0f119496d7039c08c7ec7f2
+
+
