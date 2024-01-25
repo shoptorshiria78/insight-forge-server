@@ -16,7 +16,7 @@ const router = express.Router();
   /* search category */
 router.get('/allBlog', async (req, res) => {
      const category = req.query.search;
-     //console.log(category)
+     console.log(category)
     try {
       const result = await BlogData.find({category: new RegExp(category,'i') });
       console.log(result);

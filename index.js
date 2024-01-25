@@ -27,22 +27,14 @@ mongoose.connect(
   .then(() => console.log("connecting to mongoose"))
   .catch(err => console.log(err))
 
-
-    app.use(discusRoutes)
-    app.use(blogRoutes)
-
-      
-      app.listen(port, () => {
-        console.log(`server is running on port:${port}`)
-        
-      })
 //discus Routes
 app.use(discusRoutes)
+app.use(blogRoutes)
 
 //user routes
 app.use(userRoutes)
 
-app.listen(port, () => {
+app.listen(port,() => {
   console.log(`server is running on port:${port}`)
 
 })
