@@ -10,6 +10,13 @@ router.get('/allDiscus', async (req, res) => {
     res.send(result)
 })
 
+router.get('/discuss/:id', async (req, res) => {
+    const id = req.params.id
+    const result = await DiscusData.findById(id)
+    console.log(result)
+    res.send(result)
+})
+
 router.post('/discus', async (req, res) => {
     try {
         const instance = new DiscusData(req.body);
@@ -40,6 +47,8 @@ router.put('/questionLike', verifyToken, async (req, res) => {
         console.error('Error saving data:', error.message);
     }
 })
+
+
 
 
 module.exports = router
