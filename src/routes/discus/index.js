@@ -10,6 +10,13 @@ router.get('/allDiscus', async (req, res) => {
     res.send(result)
 })
 
+router.get('/discuss/:id', async (req, res) => {
+    const id = req.params.id
+    const result = await DiscusData.findById(id)
+    console.log(result)
+    res.send(result)
+})
+
 router.post('/discus', async (req, res) => {
     try {
         const instance = new DiscusData(req.body);
@@ -33,6 +40,27 @@ router.put('/questionLike', verifyToken, async (req, res) => {
         }, {
             new: true
         }).exec()
+        res.send({ message: 'forbidden access' })
+    } catch
+    (error) {
+        // Handle any errors that occurred during the save operation
+        console.error('Error saving data:', error.message);
+    }
+})
+
+router.put('/postAnswer', verifyToken, async (req, res) => {
+    try {
+        const comment = {
+            text: req.body.test,
+            postedBy: req.body.postName
+        }
+       const result = DiscusData.findByIdAndUpdate(req.body.postId, {
+            $push: { comments: comment }
+        }, {
+            new: true
+        })
+        .populate("comments.postedBy")
+        .exec()
         res.send({ message: 'forbidden access' })
     } catch
     (error) {
