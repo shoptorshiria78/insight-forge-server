@@ -48,7 +48,26 @@ router.put('/questionLike', verifyToken, async (req, res) => {
     }
 })
 
-
+router.put('/postAnswer', verifyToken, async (req, res) => {
+    try {
+        const comment = {
+            text: req.body.test,
+            postedBy: req.body.postName
+        }
+       const result = DiscusData.findByIdAndUpdate(req.body.postId, {
+            $push: { comments: comment }
+        }, {
+            new: true
+        })
+        .populate("comments.postedBy")
+        .exec()
+        res.send({ message: 'forbidden access' })
+    } catch
+    (error) {
+        // Handle any errors that occurred during the save operation
+        console.error('Error saving data:', error.message);
+    }
+})
 
 
 module.exports = router
