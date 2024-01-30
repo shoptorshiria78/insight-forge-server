@@ -4,6 +4,18 @@ const router = express.Router();
 const jwt = require("jsonwebtoken");
 
 
+router.get('/allUsers', async (req, res) => {
+    const result = await UserData.find()
+    console.log(result)
+    res.send(result)
+})
+
+// router.get('/latestUsers', async (req, res) => {
+//     const result = await UserData.find().sort({_id: -1})
+//     console.log(result)
+//     res.send(result)
+// })
+
 router.post('/users', async (req, res) => {
     const user = req.body
     console.log(user)
