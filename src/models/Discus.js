@@ -24,7 +24,10 @@ const DiscusSchema = new Schema({
     likes: [{ type: ObjectId, ref: 'users' }],
     comments: [{
         text: String,
-        postedBy: { type: ObjectId, ref: 'users' }
+        userName: String,
+        userEmail: String,
+        userPhoto: String,
+        postedId: { type: ObjectId, ref: 'users' }
     }]
 });
 
