@@ -11,6 +11,7 @@ const mongoose = require('mongoose');
 const discusRoutes = require('./src/routes/discus')
 const blogRoutes = require('./src/routes/blog')
 const userRoutes = require('./src/routes/user')
+const jobRoutes = require('./src/routes/job')
 
 
 //middleware
@@ -33,6 +34,7 @@ app.use(blogRoutes)
 
 //user routes
 app.use(userRoutes)
+app.use(jobRoutes)
 
 app.listen(port,() => {
   console.log(`server is running on port:${port}`)
