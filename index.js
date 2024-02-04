@@ -11,7 +11,9 @@ const mongoose = require('mongoose');
 const discusRoutes = require('./src/routes/discus')
 const blogRoutes = require('./src/routes/blog')
 const userRoutes = require('./src/routes/user')
-
+const registerRoutes = require('./src/routes/registration')
+const adminCheckRoutes = require('./src/routes/admin')
+const recruiterCheckRoutes = require('./src/routes/recruiter')
 
 //middleware
 app.use(express.json());
@@ -31,8 +33,16 @@ mongoose.connect(
 app.use(discusRoutes)
 app.use(blogRoutes)
 
+//register Routes
+app.use(registerRoutes)
+
 //user routes
 app.use(userRoutes)
+
+// admin check
+app.use(adminCheckRoutes)
+// recruiter check
+app.use(recruiterCheckRoutes)
 
 app.listen(port,() => {
   console.log(`server is running on port:${port}`)

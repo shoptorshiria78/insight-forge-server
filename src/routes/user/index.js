@@ -8,10 +8,10 @@ router.post('/users', async (req, res) => {
     const user = req.body
     console.log(user)
     const query = { uEmail: user.uEmail };
-    console.log(query)
+    // console.log(query)
     
     const existingUser = await UserData.findOne(query)
-    console.log("existingUser", existingUser)
+    // console.log("existingUser", existingUser)
     if (existingUser) {
         return res.send({message: 'user already exists'})
     }
@@ -21,7 +21,7 @@ router.post('/users', async (req, res) => {
         const instance = new UserData(req.body);
 
         const savedInstance = await instance.save();
-        console.log('Data saved successfully:', savedInstance);
+        // console.log('Data saved successfully:', savedInstance);
         res.send(savedInstance, )
     } catch
     (error) {
@@ -35,7 +35,7 @@ router.post('/jwt', async(req, res)=>{
     const user = req.body
     console.log("user 123456", user)
     const token = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '1h' });
-    console.log("token", token)
+    // console.log("token", token)
     res.send(token)
 })
 

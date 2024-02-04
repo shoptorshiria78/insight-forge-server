@@ -10,6 +10,9 @@ const UserSchema = new Schema({
     uPhoto: {
         type: String,
         Default: 'no photo'
+    },
+    role: {
+        type: String
     }
 });
 
