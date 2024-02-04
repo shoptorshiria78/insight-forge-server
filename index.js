@@ -14,6 +14,8 @@ const userRoutes = require('./src/routes/user')
 const registerRoutes = require('./src/routes/registration')
 const adminCheckRoutes = require('./src/routes/admin')
 const recruiterCheckRoutes = require('./src/routes/recruiter')
+const jobRoutes = require('./src/routes/job')
+
 
 //middleware
 app.use(express.json());
@@ -38,6 +40,7 @@ app.use(registerRoutes)
 
 //user routes
 app.use(userRoutes)
+app.use(jobRoutes)
 
 // admin check
 app.use(adminCheckRoutes)

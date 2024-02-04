@@ -10,6 +10,20 @@ router.get('/allDiscus', async (req, res) => {
     res.send(result)
 })
 
+router.get('/latestDiscus', async (req, res) => {
+    const comments = 'comments'
+    const result = await DiscusData.find().sort({_id: -1})
+    console.log(result)
+    res.send(result)
+})
+
+router.get('/discuss/:id', async (req, res) => {
+    const id = req.params.id
+    const result = await DiscusData.findById(id)
+    console.log(result)
+    res.send(result)
+})
+
 router.post('/discus', async (req, res) => {
     try {
         const instance = new DiscusData(req.body);
@@ -28,8 +42,31 @@ router.post('/discus', async (req, res) => {
 
 router.put('/questionLike', verifyToken, async (req, res) => {
     try {
-       const result = DiscusData.findByIdAndUpdate(req.body.postId, {
+        const result = DiscusData.findByIdAndUpdate(req.body.postId, {
             $push: { likes: req.body.postId }
+        }, {
+            new: true
+        }).exec()
+        res.send({ message: 'post like successful' })
+    } catch
+    (error) {
+        // Handle any errors that occurred during the save operation
+        console.error('Error saving data:', error.message);
+    }
+})
+
+router.put('/postAnswer', verifyToken, async (req, res) => {
+    try {
+        const comment = {
+            text: req.body.text,
+            userName: req.body.userName,
+            userEmail: req.body.userEmail,
+            userPhoto: req.body.userPhoto,
+            postedId: req.body.postedId,
+        }
+        console.log(comment)
+        const result = DiscusData.findByIdAndUpdate(req.body.postedId, {
+            $push: { comments: comment }
         }, {
             new: true
         }).exec()
