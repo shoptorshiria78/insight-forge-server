@@ -23,11 +23,11 @@ const commentSchema = new Schema({
         required: true,
       },
       name: String, // Assuming 'name' is the author's name
-      date: String,
+      userImg: String,
       details: String,
-      rating: Number,
       comments: [commentSchema], // Embedding comments within the blog post
-    });
+    },
+    { timestamps: true });
     
     // Create models based on the schemas
     const Blog = model('blog', blogSchema);
