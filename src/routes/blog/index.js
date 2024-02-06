@@ -1,6 +1,7 @@
 const express = require('express');
 const BlogData = require('../../models/Blog');
 const router = express.Router();
+const verifyToken = require('../../middleware/verifyToken');
 
 /* router.get('/allBlog', async (req, res) => {
    try {
@@ -54,6 +55,20 @@ router.post('/blog', async (req, res) => {
          }
    
 })  */
+
+router.get('/myBlog', verifyToken, async (req, res) => {
+try{
+  const email = req.query.email;
+  const query = { userEmail: email }
+  const result = await BlogData.find(query)
+  res.send(result)
+}
+  catch
+  (error) {
+    // Handle any errors that occurred during the save operation
+    console.error('Error saving blog data:', error.message);
+  }
+})
 
 
 module.exports = router

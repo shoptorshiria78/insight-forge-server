@@ -24,6 +24,7 @@ const commentSchema = new Schema({
       },
       name: String, // Assuming 'name' is the author's name
       userImg: String,
+      userEmail: String,
       details: String,
       comments: [commentSchema], // Embedding comments within the blog post
     },
