@@ -1,3 +1,4 @@
+
 const { Schema, model } = require('mongoose');
 
 const UserSchema = new Schema({
@@ -14,6 +15,7 @@ const UserSchema = new Schema({
     role: {
         type: String
     }
+    
 });
 
 const UserData = model('users', UserSchema);

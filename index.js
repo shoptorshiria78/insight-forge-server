@@ -15,6 +15,7 @@ const registerRoutes = require('./src/routes/registration')
 const adminCheckRoutes = require('./src/routes/admin')
 const recruiterCheckRoutes = require('./src/routes/recruiter')
 const jobRoutes = require('./src/routes/job')
+const HackathonCreateRoutes = require('./src/routes/hackathon')
 
 
 //middleware
@@ -37,6 +38,9 @@ app.use(blogRoutes)
 
 //register Routes
 app.use(registerRoutes)
+
+// hackathonCreateRoutes
+app.use(HackathonCreateRoutes)
 
 //user routes
 app.use(userRoutes)
