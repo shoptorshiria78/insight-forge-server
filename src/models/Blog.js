@@ -1,11 +1,15 @@
 const {Schema, model} = require('mongoose');
+const mongoose = require('mongoose');
+const { ObjectId } = mongoose.Schema.Types
 
     // Comment schema
 const commentSchema = new Schema({
       
-      author: String,
-      date: String,
+      userName: String,
+      userPhoto: String,
+      userEmail: String,
       text: String,
+      postedId: { type: ObjectId, ref: 'users' }
     });
     
     // Blog post schema
@@ -22,12 +26,14 @@ const commentSchema = new Schema({
         type: String,
         required: true,
       },
+      likes:[{ type: ObjectId, ref: 'users' }],
       name: String, // Assuming 'name' is the author's name
-      date: String,
+      userImg: String,
+      userEmail: String,
       details: String,
-      rating: Number,
       comments: [commentSchema], // Embedding comments within the blog post
-    });
+    },
+    { timestamps: true });
     
     // Create models based on the schemas
     const Blog = model('blog', blogSchema);

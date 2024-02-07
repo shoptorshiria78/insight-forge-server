@@ -1,3 +1,4 @@
+
 const { Schema, model } = require('mongoose');
 
 const UserSchema = new Schema({
@@ -10,7 +11,11 @@ const UserSchema = new Schema({
     uPhoto: {
         type: String,
         Default: 'no photo'
+    },
+    role: {
+        type: String
     }
+    
 });
 
 const UserData = model('users', UserSchema);
