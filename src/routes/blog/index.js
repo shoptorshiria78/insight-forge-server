@@ -15,18 +15,37 @@ const verifyToken = require('../../middleware/verifyToken');
  });  */
 
 /* search category */
-router.get('/allBlog', async (req, res) => {
+router.get('/allBlogs', async (req, res) => {
   const category = req.query.search;
-  console.log(category)
-  try {
-    const result = await BlogData.find({ category: new RegExp(category, 'i') });
-    console.log(result);
-    res.send(result);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Internal Server Error' });
-  }
-});
+  // console.log(category)
+
+ try{
+    if(category){
+     const searchResult = await BlogData.find({category: new RegExp(category,'i') });
+     console.log(searchResult)
+     res.send(searchResult)
+
+    }else{
+     const result = await BlogData.find()
+    //  console.log(result)
+     res.send(result)
+
+    }
+
+ } catch(error){
+   console.error('Error get blog data')
+ }
+
+})
+
+router.get('/recentPost', async(req,res)=>{
+  const result = await BlogData.find();
+  const recent= result.slice(2,5)
+        console.log(recent)
+        res.send(recent)
+
+
+})
 
 router.post('/blog', async (req, res) => {
   try {

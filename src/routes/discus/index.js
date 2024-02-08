@@ -6,7 +6,7 @@ const verifyToken = require('../../middleware/verifyToken');
 
 router.get('/allDiscus', async (req, res) => {
     const result = await DiscusData.find()
-    console.log(result)
+    // console.log(result)
     res.send(result)
 })
 
@@ -14,14 +14,14 @@ router.get('/allDiscus', async (req, res) => {
 router.get('/latestDiscus', async (req, res) => {
     const comments = 'comments'
     const result = await DiscusData.find().sort({_id: -1})
-    console.log(result)
+    // console.log(result)
     res.send(result)
 })
 
 router.get('/discuss/:id', async (req, res) => {
     const id = req.params.id
     const result = await DiscusData.findById(id)
-    console.log(result)
+    // console.log(result)
     res.send(result)
 })
 
@@ -46,7 +46,7 @@ router.post('/discus', async (req, res) => {
 
         const savedInstance = await instance.save();
 
-        console.log('Data saved successfully:', savedInstance);
+        // console.log('Data saved successfully:', savedInstance);
         res.send(savedInstance)
     } catch
     (error) {
@@ -80,7 +80,7 @@ router.put('/postAnswer', verifyToken, async (req, res) => {
             userPhoto: req.body.userPhoto,
             postedId: req.body.postedId,
         }
-        console.log(comment)
+        // console.log(comment)
         const result = DiscusData.findByIdAndUpdate(req.body.postedId, {
             $push: { comments: comment }
         }, {

@@ -15,4 +15,15 @@ router.post('/hackathonInfo', async(req,res)=>{
     }
 })
 
+router.get('/allHackathon', async(req, res)=>{
+    try{
+        const result = await HackathonData.find()
+        // console.log(result)
+        res.send(result)
+    }catch (error) {
+        // Handle any errors that occurred during the save operation
+        console.error('Error saving data:', error.message);
+    }
+})
+
 module.exports = router

@@ -13,7 +13,7 @@ router.get('/users/admin/:email',verifyToken, async (req, res) => {
       const query = { uEmail: email };
     const user = await UserData.find(query)
     let admin = false;
-    console.log(user)
+    // console.log(user)
     if (user) {
       admin = user[0]?.role === 'admin';
     }
