@@ -21,15 +21,22 @@ const DiscusSchema = new Schema({
     category: {
         type: String
     },
-    likes: [{ type: ObjectId, ref: 'users' }],
+    likes: [{ 
+        type: ObjectId, ref: 'users'
+     }],
     comments: [{
         text: String,
         userName: String,
         userEmail: String,
         userPhoto: String,
-        postedId: { type: ObjectId, ref: 'users' }
+        postedId: { type: ObjectId, ref: 'users' },
+        date: {
+            type: Date,
+            default: Date.now,
+        }
     }]
-});
+},
+{ timestamps: true });
 
 const DiscusData = model('discus', DiscusSchema);
 
