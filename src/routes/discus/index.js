@@ -10,8 +10,7 @@ router.get('/allDiscus', async (req, res) => {
     res.send(result)
 })
 
-
-router.get('/latestDiscus', async (req, res) => {
+router.get('/resentDiscus', async (req, res) => {
     const comments = 'comments'
     const result = await DiscusData.find().sort({_id: -1})
     console.log(result)
@@ -58,7 +57,8 @@ router.post('/discus', async (req, res) => {
 
 router.put('/questionLike', verifyToken, async (req, res) => {
     try {
-        const result = DiscusData.findByIdAndUpdate(req.body.postId, {
+        console.log('dalkdj;lakdj132132132dass233132', req.body.postedId, req.body.postId)
+        const result = DiscusData.findByIdAndUpdate(req.body.postedId, {
             $push: { likes: req.body.postId }
         }, {
             new: true
@@ -80,7 +80,7 @@ router.put('/postAnswer', verifyToken, async (req, res) => {
             userPhoto: req.body.userPhoto,
             postedId: req.body.postedId,
         }
-        console.log(comment)
+       
         const result = DiscusData.findByIdAndUpdate(req.body.postedId, {
             $push: { comments: comment }
         }, {
