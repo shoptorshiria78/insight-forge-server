@@ -5,9 +5,7 @@ const verifyToken = require('../../middleware/verifyToken');
 
 
 router.get('/allDiscus', async (req, res) => {
-    const result = await DiscusData.find()
-    // console.log(result)
-    res.send(result)
+    
 })
 
 router.get('/resentDiscus', async (req, res) => {

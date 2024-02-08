@@ -65,7 +65,7 @@ const router = express.Router();
         }
         })
 
-        router.get('/myBlog', verifyToken, async (req, res) => {
+        router.get('/myBlog', async (req, res) => {
           try{
           const email = req.query.email;
           const query = { userEmail: email }
@@ -78,8 +78,9 @@ const router = express.Router();
           console.error('Error saving blog data:', error.message);
           }
           })
-          /* Comments post /
-          router.put('/commentBlog',verifyToken, async (req, res) => {
+          //  Comments post 
+
+          router.put('/commentBlog', async (req, res) => {
           try {
           const comment = {
           text: req.body.text,
@@ -94,14 +95,14 @@ const router = express.Router();
           }, {
           new: true
           }).exec()
-          res.send({ message: 'forbidden access' })
+          res.send({ message: 'comment is done' })
           } catch
           (error) {
           // Handle any errors that occurred during the save operation
           console.error('Error saving data:', error.message);
           }
           })
-          / Like APi  */
+          //  Like APi  
           router.put('/blogLike',verifyToken, async (req, res) => {
           try {
           const likeId=  req.body.postId;
