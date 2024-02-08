@@ -2,8 +2,7 @@ const express = require('express');
 const UserData = require('../../models/User');
 const router = express.Router();
 const jwt = require("jsonwebtoken");
-const { ObjectId } = require('mongodb');
-// const verifyToken = require('../../middleware/verifyToken')
+const verifyToken = require('../../middleware/verifyToken');
 
 
 router.get('/allUsers', async (req, res) => {
@@ -11,6 +10,20 @@ router.get('/allUsers', async (req, res) => {
     console.log(result)
     res.send(result)
 })
+
+router.get('/singleUser', verifyToken, async (req, res) => {
+    try{
+      const email = req.query.email;
+      const query = { uEmail: email }
+      const result = await UserData.find(query)
+      res.send(result)
+    }
+      catch
+      (error) {
+        // Handle any errors that occurred during the save operation
+        console.error('Error saving blog data:', error.message);
+      }
+    })
 
 // router.get('/latestUsers', async (req, res) => {
 //     const result = await UserData.find().sort({_id: -1})
