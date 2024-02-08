@@ -24,6 +24,21 @@ router.get('/discuss/:id', async (req, res) => {
     res.send(result)
 })
 
+router.delete('/allDiscussDelete/:id', async (req, res) => {
+
+    try {
+        // const id = req.params.id;
+        // const filter = { _id: new ObjectId(id) };
+        const result = await DiscusData.deleteOne({_id:req.params.id});
+        res.send(result);
+    }
+    catch(error){
+        console.error('Error deleting data:', error.message);
+    }
+
+})
+
+
 router.post('/discus', async (req, res) => {
     try {
         const instance = new DiscusData(req.body);
