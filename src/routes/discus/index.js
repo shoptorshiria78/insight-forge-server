@@ -55,7 +55,6 @@ router.post('/discus', async (req, res) => {
 
 router.put('/questionLike', verifyToken, async (req, res) => {
     try {
-        console.log('dalkdj;lakdj132132132dass233132', req.body.postedId, req.body.postId)
         const result = DiscusData.findByIdAndUpdate(req.body.postedId, {
             $push: { likes: req.body.postId }
         }, {
