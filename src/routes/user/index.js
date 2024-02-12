@@ -12,18 +12,18 @@ router.get('/allUsers', async (req, res) => {
 })
 
 router.get('/singleUser', verifyToken, async (req, res) => {
-    try{
-      const email = req.query.email;
-      const query = { uEmail: email }
-      const result = await UserData.find(query)
-      res.send(result)
+    try {
+        const email = req.query.email;
+        const query = { uEmail: email }
+        const result = await UserData.find(query)
+        res.send(result)
     }
-      catch
-      (error) {
+    catch
+    (error) {
         // Handle any errors that occurred during the save operation
         console.error('Error saving blog data:', error.message);
-      }
-    })
+    }
+})
 
 // router.get('/latestUsers', async (req, res) => {
 //     const result = await UserData.find().sort({_id: -1})
@@ -72,11 +72,30 @@ router.delete('/allUserDelete/:id', async (req, res) => {
         // console.log(req.params.id)
         // const id = req.params.id;
         // const filter = { _id: new ObjectId(id) };
-        const result = await UserData.deleteOne({_id:req.params.id});
+        const result = await UserData.deleteOne({ _id: req.params.id });
         res.send(result);
     }
-    catch(error){
+    catch (error) {
         console.error('Error deleting data:', error.message);
+    }
+
+})
+
+router.post('/seeAllNotification', verifyToken, async (req, res) => {
+    try {
+        const user = await UserData.findOne({ _id: req.body.userId })
+        const seeNotifications = user.seeNotifications
+        const notifications = user.notifications
+        seeNotifications.push(...notifications)
+        user.notifications = []
+        // user.seeNotifications = notifications
+        const updateUser = await user.save();
+        // console.log('Data saved successfully:', savedInstance);
+        res.status(200).send(updateUser,)
+    } catch
+    (error) {
+        // Handle any errors that occurred during the save operation
+        console.error('Error saving data:', error.message);
     }
 
 })
