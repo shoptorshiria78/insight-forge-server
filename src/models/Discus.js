@@ -3,6 +3,9 @@ const { ObjectId } = mongoose.Schema.Types
 const { Schema, model } = require('mongoose');
 
 const DiscusSchema = new Schema({
+    userId: {
+        type: ObjectId, ref: 'users'
+    },
     name: {
         type: String
     },

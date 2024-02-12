@@ -2,6 +2,7 @@ const express = require('express');
 const DiscusData = require('../../models/Discus');
 const router = express.Router();
 const verifyToken = require('../../middleware/verifyToken');
+const UserData = require('../../models/User');
 
 
 router.get('/allDiscus', async (req, res) => {
@@ -40,7 +41,7 @@ router.delete('/allDiscussDelete/:id', async (req, res) => {
 router.post('/discus', async (req, res) => {
     try {
         const instance = new DiscusData(req.body);
-
+console.log(req.body.userId)
         const savedInstance = await instance.save();
 
         // console.log('Data saved successfully:', savedInstance);
@@ -83,6 +84,14 @@ router.put('/postAnswer', verifyToken, async (req, res) => {
         }, {
             new: true
         }).exec()
+
+        const athor = UserData.findOne({userId: req.body.athorId})
+        const athorResult = UserData.findByIdAndUpdate(req.body.athorId, {
+            $push: { notifications: comment }
+        }, {
+            new: true
+        }).exec()
+        
         res.send({ message: 'forbidden access' })
     } catch
     (error) {

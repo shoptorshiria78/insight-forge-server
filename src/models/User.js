@@ -14,6 +14,14 @@ const UserSchema = new Schema({
     },
     role: {
         type: String
+    },
+    notifications:{
+        type: Array,
+        default: []
+    },
+    seeNotifications:{
+        type: Array,
+        default: []
     }
     
 });
