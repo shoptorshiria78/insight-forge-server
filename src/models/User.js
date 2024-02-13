@@ -1,4 +1,5 @@
-
+const mongoose = require('mongoose');
+const { ObjectId } = mongoose.Schema.Types
 const { Schema, model } = require('mongoose');
 
 const UserSchema = new Schema({
@@ -15,15 +16,22 @@ const UserSchema = new Schema({
     role: {
         type: String
     },
-    notifications:{
-        type: Array,
-        default: []
-    },
-    seeNotifications:{
+    notifications: [{
+        text: String,
+        userName: String,
+        userEmail: String,
+        userPhoto: String,
+        postedId: { type: ObjectId, ref: 'users' },
+        date: {
+            type: Date,
+            default: Date.now,
+        }
+    }],
+    seeNotifications: {
         type: Array,
         default: []
     }
-    
+
 });
 
 const UserData = model('users', UserSchema);
