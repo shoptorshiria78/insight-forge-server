@@ -78,6 +78,13 @@ router.put('/postAnswer', verifyToken, async (req, res) => {
             userPhoto: req.body.userPhoto,
             postedId: req.body.postedId,
         }
+        const notification = {
+            text: 'has answered your question.',
+            userName: req.body.userName,
+            userEmail: req.body.userEmail,
+            userPhoto: req.body.userPhoto,
+            postedId: req.body.postedId,
+        }
        
         const result = DiscusData.findByIdAndUpdate(req.body.postedId, {
             $push: { comments: comment }
@@ -87,7 +94,7 @@ router.put('/postAnswer', verifyToken, async (req, res) => {
 
         const athor = UserData.findOne({userId: req.body.athorId})
         const athorResult = UserData.findByIdAndUpdate(req.body.athorId, {
-            $push: { notifications: comment }
+            $push: { notifications: notification }
         }, {
             new: true
         }).exec()
