@@ -16,6 +16,8 @@ const adminCheckRoutes = require('./src/routes/admin')
 const recruiterCheckRoutes = require('./src/routes/recruiter')
 const jobRoutes = require('./src/routes/job')
 const HackathonCreateRoutes = require('./src/routes/hackathon')
+const ConversationRoutes = require('./src/routes/conversation')
+const MessageRoutes = require('./src/routes/message')
 
 
 //middleware
@@ -50,6 +52,12 @@ app.use(jobRoutes)
 app.use(adminCheckRoutes)
 // recruiter check
 app.use(recruiterCheckRoutes)
+
+//  conversation routes
+app.use(ConversationRoutes)
+
+// message routes
+app.use(MessageRoutes)
 
 app.listen(port,() => {
   console.log(`server is running on port:${port}`)

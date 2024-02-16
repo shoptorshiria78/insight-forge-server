@@ -80,7 +80,7 @@ router.post('/register', async (req, res) => {
 
             },)
             if(result.modifiedCount === 1){
-                res.redirect(`http://localhost:3000/paymentSuccess/${query}`)
+                res.redirect(`https://insight-forge-psi.vercel.app/paymentSuccess/${query}`)
             }
         })
 

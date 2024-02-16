@@ -13,10 +13,19 @@ router.get('/allUsers', async (req, res) => {
 
 router.get('/singleUser', verifyToken, async (req, res) => {
     try{
+        // console.log(req.decode)
       const email = req.query.email;
-      const query = { uEmail: email }
-      const result = await UserData.find(query)
-      res.send(result)
+
+      if(email === req.decode.uEmail){
+        const query = { uEmail: req.decode.uEmail }
+      
+        const result = await UserData.find(query)
+        // console.log("email form single user",result)
+       
+        res.send(result)
+      }
+      
+      
     }
       catch
       (error) {

@@ -13,7 +13,7 @@ module.exports = (req, res, next) => {
             return res.status(401).send({ message: 'forbidden access' })
         }
         req.decode = decode
-        console.log("verifypage", decode)
+        // console.log("verifypage", decode)
         next()
         // const user = payload
         // UserData.findById(user).then(userData=>{
