@@ -120,4 +120,16 @@ router.put('/blogLike', verifyToken, async (req, res) => {
   }
 })
 
+router.delete('/deleteMyBlog/:id', async (req, res) => {
+
+  try {
+      const result = await BlogData.deleteOne({ _id: req.params.id });
+      res.send(result);
+  }
+  catch (error) {
+      console.error('Error deleting data:', error.message);
+  }
+
+})
+
 module.exports = router
