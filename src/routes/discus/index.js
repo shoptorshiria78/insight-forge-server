@@ -61,6 +61,22 @@ router.put('/questionLike', verifyToken, async (req, res) => {
         }, {
             new: true
         }).exec()
+
+        const notification = {
+            text: 'has like your question.',
+            userName: req.body.userName,
+            userEmail: req.body.userEmail,
+            userPhoto: req.body.userPhoto,
+            postedId: req.body.postedId,
+        }        
+
+        const athor = UserData.findOne({userId: req.body.athorId})
+        const athorResult = UserData.findByIdAndUpdate(req.body.athorId, {
+            $push: { notifications: notification }
+        }, {
+            new: true
+        }).exec()
+
         res.send({ message: 'post like successful' })
     } catch
     (error) {
