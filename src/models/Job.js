@@ -19,7 +19,8 @@ const jobSchema = new Schema({
     },
     category: {
         type: String
-    }
+    },
+   
 
 });
 

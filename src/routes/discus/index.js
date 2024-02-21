@@ -69,6 +69,9 @@ router.put('/questionLike', verifyToken, async (req, res) => {
     }
 })
 
+
+
+
 router.put('/postAnswer', verifyToken, async (req, res) => {
     try {
         const comment = {
