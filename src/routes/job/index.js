@@ -3,6 +3,7 @@ const JobData = require('../../models/Job');
 const router = express.Router();
 
 
+
   router.get('/job', async (req, res) => {
     try {
       const result = await JobData.find();
@@ -14,9 +15,23 @@ const router = express.Router();
     }
   });
 
+  router.get('/myjob', async (req, res) => {
+    try {
+      const email = req.query.email;
+      const query = { userEmail: email }
+      const result = await JobData.find(query)
+      res.send(result)
+
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  });
+
  router.post('/job', async (req, res) => {
     try{
-    const instance = new JobData(req.body.formData);
+    const instance = new JobData(req.body);
+    console.log(instance)
     const savedInstance = await instance.save();
     console.log('job post successfully:',savedInstance);
     res.send(savedInstance)

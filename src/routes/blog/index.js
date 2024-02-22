@@ -40,6 +40,7 @@ router.get('/recentPost', async (req, res) => {
   //console.log(recent)
   res.send(recent)
 })
+
 router.post('/blog', async (req, res) => {
   try {
     const instance = new BlogData(req.body);

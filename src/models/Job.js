@@ -1,8 +1,9 @@
-// const mongoose = require('mongoose');
+
 const { Schema, model } = require('mongoose');
 
 const jobSchema = new Schema({
-  companyname: {
+    
+    companyname: {
         type: String
     },
     logo: {
@@ -12,17 +13,17 @@ const jobSchema = new Schema({
         type: String
     },
     location: {
-      type: String
-  },
+        type: String
+    },
     description: {
         type: String
     },
     category: {
         type: String
-    }
-
+    },
+    userEmail: String,
 });
 
 const JobData = model('job', jobSchema);
 
-module.exports = JobData
+module.exports = JobData;

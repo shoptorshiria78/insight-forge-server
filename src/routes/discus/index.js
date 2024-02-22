@@ -6,12 +6,12 @@ const UserData = require('../../models/User');
 
 
 router.get('/allDiscus', async (req, res) => {
-    
+
 })
 
 router.get('/resentDiscus', async (req, res) => {
     const comments = 'comments'
-    const result = await DiscusData.find().sort({_id: -1})
+    const result = await DiscusData.find().sort({ _id: -1 })
     // console.log(result)
     res.send(result)
 })
@@ -28,10 +28,10 @@ router.delete('/allDiscussDelete/:id', async (req, res) => {
     try {
         // const id = req.params.id;
         // const filter = { _id: new ObjectId(id) };
-        const result = await DiscusData.deleteOne({_id:req.params.id});
+        const result = await DiscusData.deleteOne({ _id: req.params.id });
         res.send(result);
     }
-    catch(error){
+    catch (error) {
         console.error('Error deleting data:', error.message);
     }
 
@@ -41,7 +41,7 @@ router.delete('/allDiscussDelete/:id', async (req, res) => {
 router.post('/discus', async (req, res) => {
     try {
         const instance = new DiscusData(req.body);
-console.log(req.body.userId)
+        console.log(req.body.userId)
         const savedInstance = await instance.save();
 
         // console.log('Data saved successfully:', savedInstance);
@@ -85,20 +85,20 @@ router.put('/postAnswer', verifyToken, async (req, res) => {
             userPhoto: req.body.userPhoto,
             postedId: req.body.postedId,
         }
-       
+
         const result = DiscusData.findByIdAndUpdate(req.body.postedId, {
             $push: { comments: comment }
         }, {
             new: true
         }).exec()
 
-        const athor = UserData.findOne({userId: req.body.athorId})
+        const athor = UserData.findOne({ userId: req.body.athorId })
         const athorResult = UserData.findByIdAndUpdate(req.body.athorId, {
             $push: { notifications: notification }
         }, {
             new: true
         }).exec()
-        
+
         res.send({ message: 'forbidden access' })
     } catch
     (error) {
