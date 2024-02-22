@@ -9,6 +9,7 @@ router.get('/allDiscus', async (req, res) => {
     
 })
 
+// get resent data
 router.get('/resentDiscus', async (req, res) => {
     const comments = 'comments'
     const result = await DiscusData.find().sort({_id: -1})
@@ -16,12 +17,28 @@ router.get('/resentDiscus', async (req, res) => {
     res.send(result)
 })
 
+//find data by id
 router.get('/discuss/:id', async (req, res) => {
     const id = req.params.id
     const result = await DiscusData.findById(id)
     // console.log(result)
     res.send(result)
 })
+
+//find data by user
+router.get('/myDiscuss', verifyToken, async (req, res) => {
+    try {
+      const email = req.query.email;
+      const query = { email: email }
+      const result = await DiscusData.find(query).sort({_id: -1})
+      res.send(result)
+    }
+    catch
+    (error) {
+      // Handle any errors that occurred during the save operation
+      console.error('Error saving blog data:', error.message);
+    }
+  })
 
 router.delete('/allDiscussDelete/:id', async (req, res) => {
 

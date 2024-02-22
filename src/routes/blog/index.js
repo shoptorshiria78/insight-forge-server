@@ -69,7 +69,7 @@ router.get('/myBlog', async (req, res) => {
   try {
     const email = req.query.email;
     const query = { userEmail: email }
-    const result = await BlogData.find(query)
+    const result = await BlogData.find(query).sort({_id: -1})
     res.send(result)
   }
   catch
