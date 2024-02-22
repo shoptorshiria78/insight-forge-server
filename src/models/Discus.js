@@ -27,6 +27,7 @@ const DiscusSchema = new Schema({
     likes: [{ 
         type: ObjectId, ref: 'users'
      }],
+  
     comments: [{
         text: String,
         userName: String,
