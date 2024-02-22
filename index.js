@@ -15,6 +15,7 @@ const registerRoutes = require('./src/routes/registration')
 const adminCheckRoutes = require('./src/routes/admin')
 const recruiterCheckRoutes = require('./src/routes/recruiter')
 const jobRoutes = require('./src/routes/job')
+const quizRoutes = require('./src/routes/quiz3')
 const HackathonCreateRoutes = require('./src/routes/hackathon')
 const ConversationRoutes = require('./src/routes/conversation')
 const MessageRoutes = require('./src/routes/message')
@@ -46,7 +47,10 @@ app.use(HackathonCreateRoutes)
 
 //user routes
 app.use(userRoutes)
+
 app.use(jobRoutes)
+
+app.use(quizRoutes)
 
 // admin check
 app.use(adminCheckRoutes)
