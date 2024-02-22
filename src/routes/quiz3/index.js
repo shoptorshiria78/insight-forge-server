@@ -14,6 +14,19 @@ const router = express.Router();
     }
   });
 
+  // router.get('/quiz3/:category', async (req, res) => {
+  //   try {
+  //     const { category } = req.params;
+  //     const result = await QuizData.find({ category: category });
+  //     console.log(result);
+  //     res.send(result);
+  //   } catch (error) {
+  //     console.error(error);
+  //     res.status(500).json({ error: 'Internal Server Error' });
+  //   }
+  // });
+  
+
  router.post('/quiz3', async (req, res) => {
     try{
     const instance = new QuizData(req.body.formData);
