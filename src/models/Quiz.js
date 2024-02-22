@@ -1,58 +1,33 @@
-// const mongoose = require('mongoose');
-// const { Schema, model } = require('mongoose');
-
-// const quizSchema = new Schema({
-//     category: {
-//         type: String
-//     },
-//     question: {
-//         type: String
-//     },
-//     options: [{
-//         type: String
-//     }
-//     ],
-//     correctAnswer: {
-//       type: String
-//     },
-   
-
-// });
-
-// const QuizData = model('quiz3', quizSchema);
-
-// module.exports = QuizData
-
-
-
+//const mongoose = require('mongoose');
 const { Schema, model } = require('mongoose');
 
-const questionSchema = new Schema({
+const quizSchema = new Schema({
+   
     question: {
-        type: String,
-        required: true
+        type: String
     },
-    options: {
-        type: [String], 
-        required: true
+    option1: {
+        type: String
+    },
+    option2: {
+        type: String
+    },
+    option3: {
+        type: String
+    },
+    option4: {
+        type: String
     },
     correctAnswer: {
-        type: String,
-        required: true
-    }
-});
-
-const quizSchema = new Schema({
-    category: {
-        type: String,
-        required: true
+      type: String
     },
-    questions: {
-        type: [questionSchema], 
-        required: true
-    }
+   
+
 });
 
 const QuizData = model('quiz3', quizSchema);
 
-module.exports = QuizData;
+module.exports = QuizData
+
+
+
