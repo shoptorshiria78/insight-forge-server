@@ -2,7 +2,9 @@
 const { Schema, model } = require('mongoose');
 
 const quizSchema = new Schema({
-   
+   category:{
+        type: String
+   },
     question: {
         type: String
     },
