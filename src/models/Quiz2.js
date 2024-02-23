@@ -27,9 +27,6 @@ const quizSchema = new Schema({
 
 });
 
-const QuizData = model('quiz3', quizSchema);
+const QuizData = model('quiz4', quizSchema);
 
 module.exports = QuizData
-
-
-
