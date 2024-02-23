@@ -9,6 +9,7 @@ router.get('/allDiscus', async (req, res) => {
 
 })
 
+// get resent data
 router.get('/resentDiscus', async (req, res) => {
     const comments = 'comments'
     const result = await DiscusData.find().sort({ _id: -1 })
@@ -16,12 +17,28 @@ router.get('/resentDiscus', async (req, res) => {
     res.send(result)
 })
 
+//find data by id
 router.get('/discuss/:id', async (req, res) => {
     const id = req.params.id
     const result = await DiscusData.findById(id)
     // console.log(result)
     res.send(result)
 })
+
+//find data by user
+router.get('/myDiscuss', verifyToken, async (req, res) => {
+    try {
+      const email = req.query.email;
+      const query = { email: email }
+      const result = await DiscusData.find(query).sort({_id: -1})
+      res.send(result)
+    }
+    catch
+    (error) {
+      // Handle any errors that occurred during the save operation
+      console.error('Error saving blog data:', error.message);
+    }
+  })
 
 router.delete('/allDiscussDelete/:id', async (req, res) => {
 
@@ -61,6 +78,22 @@ router.put('/questionLike', verifyToken, async (req, res) => {
         }, {
             new: true
         }).exec()
+
+        const notification = {
+            text: 'has like your question.',
+            userName: req.body.userName,
+            userEmail: req.body.userEmail,
+            userPhoto: req.body.userPhoto,
+            postedId: req.body.postedId,
+        }        
+
+        const athor = UserData.findOne({userId: req.body.athorId})
+        const athorResult = UserData.findByIdAndUpdate(req.body.athorId, {
+            $push: { notifications: notification }
+        }, {
+            new: true
+        }).exec()
+
         res.send({ message: 'post like successful' })
     } catch
     (error) {
@@ -68,6 +101,9 @@ router.put('/questionLike', verifyToken, async (req, res) => {
         console.error('Error saving data:', error.message);
     }
 })
+
+
+
 
 router.put('/postAnswer', verifyToken, async (req, res) => {
     try {
