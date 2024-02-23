@@ -15,10 +15,12 @@ const router = express.Router();
     }
   });
 
+
   router.get('/myjob', async (req, res) => {
     try {
-      const email = req.query.email;
+      const email = req?.query?.email;
       const query = { userEmail: email }
+      // console.log('hello goooooooooo',query);
       const result = await JobData.find(query)
       res.send(result)
 
@@ -42,6 +44,19 @@ const router = express.Router();
           }
     
 })  
+
+router.delete('/job/:id', async (req, res) => {
+
+  try {
+      const result = await JobData.deleteOne({ _id: req.params.id });
+      res.send(result);
+  }
+  catch (error) {
+      console.error('Error deleting data:', error.message);
+  }
+
+})
+
 
 module.exports = router
 
