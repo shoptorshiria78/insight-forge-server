@@ -58,6 +58,7 @@ router.post('/register', async (req, res) => {
 
             const registeredHackathon = {
                 order,
+                email:order.email,
                 paidStatus: false,
                 transactionId: tran_id
             }
@@ -80,7 +81,7 @@ router.post('/register', async (req, res) => {
 
             },)
             if(result.modifiedCount === 1){
-                res.redirect(`https://insight-forge-psi.vercel.app/paymentSuccess/${query}`)
+                res.redirect(`http://localhost:3000/paymentSuccess/${query}`)
             }
         })
 
@@ -103,6 +104,18 @@ router.delete('/allPaymentDelete/:id', async (req, res) => {
         console.error('Error deleting data:', error.message);
     }
 
+})
+
+router.get('/singlePayment/:email', async(req, res)=>{
+    try {
+        console.log("payment email", req.params.email)
+        const singlePayment = await RegisterData.find({email: req.params.email});
+        console.log("payment", singlePayment)
+        res.send(singlePayment);
+
+    } catch (err) {
+        res.status(500).json(err)
+    }
 })
 
 
