@@ -80,6 +80,26 @@ router.delete('/allUserDelete/:id', async (req, res) => {
     }
 
 })
+router.patch('/userRoleUpdate/:id', async (req, res) => {
+
+    try {
+        // console.log(req.params.id)
+        // const id = req.params.id;
+        // const filter = { _id: new ObjectId(id) };
+        const result = await UserData.findByIdAndUpdate({ _id: req.params.id },
+            {
+                $set:{
+                    role: "admin"
+                },
+
+        });
+        res.send(result);
+    }
+    catch (error) {
+        console.error('Error Updating userRole:', error.message);
+    }
+
+})
 
 router.post('/seeAllNotification', verifyToken, async (req, res) => {
     try {

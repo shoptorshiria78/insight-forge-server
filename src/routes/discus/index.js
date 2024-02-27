@@ -12,6 +12,10 @@ router.get('/allDiscus', async (req, res) => {
 
 // get resent data
 router.get('/resentDiscus', async (req, res) => {
+<<<<<<< HEAD
+=======
+    const comments = 'comments'
+>>>>>>> 66551ba7db7e55b08e18988786479017b51ee082
     const result = await DiscusData.find().sort({ _id: -1 })
     // console.log(result)
     res.send(result)
@@ -104,7 +108,13 @@ router.put('/questionLike', verifyToken, async (req, res) => {
     }
 })
 
+<<<<<<< HEAD
 //post comment
+=======
+
+
+
+>>>>>>> 66551ba7db7e55b08e18988786479017b51ee082
 router.put('/postAnswer', verifyToken, async (req, res) => {
     try {
         const comment = {
