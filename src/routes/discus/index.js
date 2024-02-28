@@ -12,10 +12,6 @@ router.get('/allDiscus', async (req, res) => {
 
 // get resent data
 router.get('/resentDiscus', async (req, res) => {
-<<<<<<< HEAD
-=======
-    const comments = 'comments'
->>>>>>> 66551ba7db7e55b08e18988786479017b51ee082
     const result = await DiscusData.find().sort({ _id: -1 })
     // console.log(result)
     res.send(result)
@@ -91,6 +87,7 @@ router.put('/questionLike', verifyToken, async (req, res) => {
             userEmail: req.body.userEmail,
             userPhoto: req.body.userPhoto,
             postedId: req.body.postedId,
+            athorId: req.body.athorId,
         }
 
         const athor = UserData.findOne({ userId: req.body.athorId })
@@ -108,13 +105,7 @@ router.put('/questionLike', verifyToken, async (req, res) => {
     }
 })
 
-<<<<<<< HEAD
 //post comment
-=======
-
-
-
->>>>>>> 66551ba7db7e55b08e18988786479017b51ee082
 router.put('/postAnswer', verifyToken, async (req, res) => {
     try {
         const comment = {
@@ -130,6 +121,7 @@ router.put('/postAnswer', verifyToken, async (req, res) => {
             userEmail: req.body.userEmail,
             userPhoto: req.body.userPhoto,
             postedId: req.body.postedId,
+            athorId: req.body.athorId,
         }
 
         const result = DiscusData.findByIdAndUpdate(req.body.postedId, {
@@ -173,6 +165,35 @@ router.put('/deleteComment', async (req, res) => {
                 }
             }
         ).exec()
+        res.send(result)
+    } catch (error) {
+        // Handle any errors that occurred during the save operation
+        console.error('Error saving data:', error.message);
+    }
+})
+
+// update a comment
+router.put('/updateComment', async (req, res) => {
+    try {
+        const commentIdToUpdate = req.body.updatedId;
+        const updatedText = req.body.text;
+
+        const result = await DiscusData.findOneAndUpdate(
+            { "comments._id": commentIdToUpdate }, // Match the document containing the comment
+            { $set: { "comments.$.text": updatedText } }, // Update the text of the matched comment
+            { new: true } // To return the updated document
+        )
+            .then(updatedDocument => {
+                if (updatedDocument) {
+                    console.log("Updated comment:", updatedDocument);
+                } else {
+                    console.log("Comment not found.");
+                }
+            })
+            .catch(error => {
+                console.error("Error updating comment:", error);
+            });
+
         res.send(result)
     } catch (error) {
         // Handle any errors that occurred during the save operation
