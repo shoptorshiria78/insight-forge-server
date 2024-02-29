@@ -105,6 +105,7 @@ router.post('/seeAllNotification', verifyToken, async (req, res) => {
     try {
         const user = await UserData.findOne({ _id: req.body.userId })
         const seeNotifications = user.seeNotifications
+        console.log(seeNotifications)
         const notifications = user.notifications
         seeNotifications.push(...notifications)
         user.notifications = []
@@ -118,6 +119,32 @@ router.post('/seeAllNotification', verifyToken, async (req, res) => {
         console.error('Error saving data:', error.message);
     }
 
+})
+
+// delete a notification
+router.put('/deleteNotification', async (req, res) => {
+    try {
+        const postId = req.body.athorId; // ID of the post containing the comments
+        const notificationIdToDelete = req.body.id
+        const result = await UserData.updateOne(
+            { _id: postId }, // Match the post by its ID
+            { $pull: { seeNotifications: { _id: notificationIdToDelete } } }, // Pull the comment with the specified ID
+            { new: true },
+            (err, result) => {
+                if (err) {
+                    console.error(err);
+                    // Handle error
+                } else {
+                    console.log("Comment deleted successfully");
+                    // Handle success
+                }
+            }
+        ).exec()
+        res.send(result)
+    } catch (error) {
+        // Handle any errors that occurred during the save operation
+        console.error('Error saving data:', error.message);
+    }
 })
 
 module.exports = router
