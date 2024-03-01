@@ -14,6 +14,12 @@ const HackathonCreateSchema = new Schema({
     },
     category:{
         type: String
+    },
+    date:{
+        type: String
+    },
+    fee:{
+        type: Number
     }
 })
 

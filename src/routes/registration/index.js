@@ -19,9 +19,10 @@ router.post('/register', async (req, res) => {
         const order = req.body
 
         const data = {
-            total_amount: hackathon.totalPrice,
+            total_amount: hackathon.fee,
             currency: order.currency,
             tran_id: tran_id, // use unique tran_id for each api call
+            // success_url: `https://insight-forge-server.vercel.app/paymentSuccess/${tran_id}`,
             success_url: `http://localhost:5000/paymentSuccess/${tran_id}`,
             fail_url: 'http://localhost:3030/fail',
             cancel_url: 'http://localhost:3030/cancel',
@@ -81,6 +82,7 @@ router.post('/register', async (req, res) => {
 
             },)
             if(result.modifiedCount === 1){
+                // res.redirect(`https://insight-forge-psi.vercel.app/paymentSuccess/${query}`)
                 res.redirect(`http://localhost:3000/paymentSuccess/${query}`)
             }
         })

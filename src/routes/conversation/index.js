@@ -6,11 +6,13 @@ const router = express.Router();
 // new conversation
 
 router.post('/conversation', async (req, res) => {
-    const senderId =  req.body.senderIdId ;
+    const senderId =  req.body.senderId ;
     const receiverId = req.body.receiverId;
+    console.log(senderId,receiverId)
     
-    const query = {members: [senderId,receiverId]}
-    const existingConversation = await ConversationData.findOne(query);
+    const existingConversation = await ConversationData.find({
+        members: { $all: [senderId, receiverId] }
+    });
    
     console.log("console.log from existingconverstation",existingConversation)
     // console.log("console.log from existingconverstation",existingConversation.length)
