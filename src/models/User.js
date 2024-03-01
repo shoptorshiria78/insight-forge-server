@@ -22,6 +22,7 @@ const UserSchema = new Schema({
         userEmail: String,
         userPhoto: String,
         postedId: { type: ObjectId, ref: 'users' },
+        athorId: { type: ObjectId, ref: 'users' },
         date: {
             type: Date,
             default: Date.now,
