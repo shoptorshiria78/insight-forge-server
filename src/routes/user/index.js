@@ -88,11 +88,11 @@ router.patch('/userRoleUpdate/:id', async (req, res) => {
         // const filter = { _id: new ObjectId(id) };
         const result = await UserData.findByIdAndUpdate({ _id: req.params.id },
             {
-                $set:{
+                $set: {
                     role: "admin"
                 },
 
-        });
+            });
         res.send(result);
     }
     catch (error) {
@@ -124,27 +124,53 @@ router.post('/seeAllNotification', verifyToken, async (req, res) => {
 // delete a notification
 router.put('/deleteNotification', async (req, res) => {
     try {
-        const postId = req.body.athorId; // ID of the post containing the comments
-        const notificationIdToDelete = req.body.id
+
+        const userId = req.body.athorId; // ID of the user
+        const notificationIdToDelete = req.body.id; // ID of the notification to delete
+
         const result = await UserData.updateOne(
-            { _id: postId }, // Match the post by its ID
-            { $pull: { seeNotifications: { _id: notificationIdToDelete } } }, // Pull the comment with the specified ID
+            { _id: userId },
+            { $pull: { seeNotifications: { _id: notificationIdToDelete } } },
             { new: true },
             (err, result) => {
                 if (err) {
-                    console.error(err);
-                    // Handle error
+                    console.error("Error updating user:", err);
                 } else {
-                    console.log("Comment deleted successfully");
-                    // Handle success
+                    console.log("Notification deleted successfully:", result);
                 }
             }
-        ).exec()
+        ).exec();
+
         res.send(result)
     } catch (error) {
         // Handle any errors that occurred during the save operation
         console.error('Error saving data:', error.message);
     }
+})
+
+//update user info
+router.patch('/userUpdate/:id', async (req, res) => {
+
+    try {
+        const result = await UserData.findByIdAndUpdate({ _id: req.params.id },
+            {
+                $set: {
+                    country: req.body.country,
+                    permanentAddress: req.body.permanentAddress,
+                    presentAddress: req.body.presentAddress,
+                    Workplace: req.body.Workplace,
+                    post: req.body.post,
+                    birthday: req.body.birthday,
+                    phone: req.body.phone,
+                },
+
+            });
+        res.send(result);
+    }
+    catch (error) {
+        console.error('update error', error.message);
+    }
+
 })
 
 module.exports = router
