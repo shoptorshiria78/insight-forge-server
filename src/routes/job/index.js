@@ -3,7 +3,7 @@ const JobData = require('../../models/Job');
 const router = express.Router();
 
 
-
+// get all job data
   router.get('/job', async (req, res) => {
     try {
       const result = await JobData.find();
@@ -15,7 +15,7 @@ const router = express.Router();
     }
   });
 
-
+// get job data based on email
   router.get('/myjob', async (req, res) => {
     try {
       const email = req?.query?.email;
@@ -29,6 +29,8 @@ const router = express.Router();
       res.status(500).json({ error: 'Internal Server Error' });
     }
   });
+
+  // Sending Data
 
  router.post('/job', async (req, res) => {
     try{
@@ -45,6 +47,7 @@ const router = express.Router();
     
 })  
 
+// Delete post
 router.delete('/job/:id', async (req, res) => {
 
   try {
