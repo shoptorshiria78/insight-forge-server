@@ -22,7 +22,7 @@ router.post('/register', async (req, res) => {
             total_amount: hackathon.fee,
             currency: order.currency,
             tran_id: tran_id, // use unique tran_id for each api call
-            // success_url: `https://insight-forge-server.vercel.app/paymentSuccess/${tran_id}`,
+            // success_url: `https://insight-forge-psi.vercel.app/paymentSuccess/${tran_id}`,
             success_url: `http://localhost:5000/paymentSuccess/${tran_id}`,
             fail_url: 'http://localhost:3030/fail',
             cancel_url: 'http://localhost:3030/cancel',
@@ -71,7 +71,7 @@ router.post('/register', async (req, res) => {
         });
 
         router.post('/paymentSuccess/:transId', async(req, res)=>{
-            console.log(req.params.transId);
+            // console.log(req.params.transId);
             const query = req.params.transId
 
             const result = await RegisterData.updateOne({transactionId: req.params.transId},
@@ -82,8 +82,8 @@ router.post('/register', async (req, res) => {
 
             },)
             if(result.modifiedCount === 1){
-                // res.redirect(`https://insight-forge-psi.vercel.app/paymentSuccess/${query}`)
-                res.redirect(`http://localhost:3000/paymentSuccess/${query}`)
+                res.redirect(`https://insight-forge-psi.vercel.app/paymentSuccess/${query}`)
+                // res.redirect(`http://localhost:3000/paymentSuccess/${query}`)
             }
         })
 
@@ -91,7 +91,7 @@ router.post('/register', async (req, res) => {
 
 router.get('/allPayment', async(req, res) =>{
     const result = await RegisterData.find()
-     console.log(result)
+    //  console.log(result)
     res.send(result)
 })
 
@@ -111,8 +111,10 @@ router.delete('/allPaymentDelete/:id', async (req, res) => {
 router.get('/singlePayment/:email', async(req, res)=>{
     try {
         console.log("payment email", req.params.email)
-        const singlePayment = await RegisterData.find({email: req.params.email});
-        console.log("payment", singlePayment)
+        const email =  req.params.email
+        const query = { email:email}
+        const singlePayment = await RegisterData.find(query);
+        // console.log("payment", singlePayment)
         res.send(singlePayment);
 
     } catch (err) {

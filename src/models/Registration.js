@@ -47,6 +47,7 @@ const RegistrationSchema = new Schema({
         category: String,
         title: String,
         totalPrice: String,
+        priceMoney:String,
         description: String,
         currency: String,
         address: String

@@ -26,6 +26,8 @@ router.get('/allHackathon', async(req, res)=>{
     }
 })
 
+
+
 router.delete('/hackathonDelete/:id', async (req, res) => {
 
     try {
