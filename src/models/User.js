@@ -16,6 +16,34 @@ const UserSchema = new Schema({
     role: {
         type: String
     },
+    country: {
+        type: String,
+        Default: 'N/A'
+    },
+    permanentAddress: {
+        type: String,
+        Default: 'N/A'
+    },
+    presentAddress: {
+        type: String,
+        Default: 'N/A'
+    },
+    Workplace: {
+        type: String,
+        Default: 'N/A'
+    },
+    post: {
+        type: String,
+        Default: 'N/A'
+    },
+    birthday: {
+        type: Date,
+        default: Date.now
+    },
+    phone: {
+        type: Number,
+        Default: 'N/A'
+    },
     notifications: [{
         text: String,
         userName: String,

@@ -19,6 +19,7 @@ const HackathonCreateRoutes = require('./src/routes/hackathon')
 const ConversationRoutes = require('./src/routes/conversation')
 const MessageRoutes = require('./src/routes/message')
 const SubmissionRoutes = require('./src/routes/submission')
+const ReviewRoutes = require('./src/routes/review')
 
 
 //middleware
@@ -62,6 +63,7 @@ app.use(ConversationRoutes)
 
 // message routes
 app.use(MessageRoutes)
+app.use(ReviewRoutes)
 
 // submission routes
 app.use(SubmissionRoutes)
